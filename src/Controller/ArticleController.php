@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Representation\Articles;
-// use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -15,6 +14,9 @@ use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\View;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Validator\ConstraintViolationList;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
+use Swagger\Annotations as SWG;
 
 class ArticleController extends FOSRestController
 {
@@ -24,27 +26,28 @@ class ArticleController extends FOSRestController
      *     name="keyword",
      *     requirements="[a-zA-Z0-9]",
      *     nullable=true,
-     *     description="The keyword to search for."
+     *     description="Mot clé pour la recherche."
      * )
      * @Rest\QueryParam(
      *     name="order",
      *     requirements="asc|desc",
      *     default="asc",
-     *     description="Sort order (asc or desc)"
+     *     description="Ordre de tri (asc or desc)"
      * )
      * @Rest\QueryParam(
      *     name="limit",
      *     requirements="\d+",
      *     default="15",
-     *     description="Max number of movies per page."
+     *     description="Maximum d'articles par page."
      * )
      * @Rest\QueryParam(
      *     name="offset",
      *     requirements="\d+",
      *     default="0",
-     *     description="The pagination offset"
+     *     description="Page"
      * )
      * @Rest\View()
+     * 
      */
     public function listAction(ParamFetcherInterface $paramFetcher)
     {
@@ -62,6 +65,7 @@ class ArticleController extends FOSRestController
      * @Rest\Post("/articles")
      * @Rest\View(StatusCode = 201)
      * @ParamConverter("article", converter="fos_rest.request_body")
+     * 
      */
     public function createAction(Article $article, ConstraintViolationList $violations)
     {
@@ -84,6 +88,7 @@ class ArticleController extends FOSRestController
      *     requirements = {"id"="\d+"}
      * )
      * @View
+     * 
      */
     public function showAction(Article $article)
     {

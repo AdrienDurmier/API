@@ -93,7 +93,7 @@
         "version": "2.1.4"
     },
     "exsyst/swagger": {
-        "version": "v0.4.0"
+        "version": "v0.4.1"
     },
     "facebook/webdriver": {
         "version": "1.6.0"
@@ -507,6 +507,6 @@
         "version": "3.2.1"
     },
     "zircote/swagger-php": {
-        "version": "2.0.13"
+        "version": "2.0.14"
     }
 }
