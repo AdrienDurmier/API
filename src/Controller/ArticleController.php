@@ -18,6 +18,9 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use Swagger\Annotations as SWG;
 
+/**
+ * @Route("/api")
+ */
 class ArticleController extends FOSRestController
 {
     /**
