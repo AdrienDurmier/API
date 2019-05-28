@@ -112,6 +112,7 @@ class ArticleController extends FOSRestController
 
         $article->setTitle($newArticle->getTitle());
         $article->setContent($newArticle->getContent());
+        $article->setPublic($newArticle->getPublic());
 
         $this->getDoctrine()->getManager()->flush();
 
