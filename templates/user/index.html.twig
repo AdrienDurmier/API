@@ -48,7 +48,11 @@
                             </td>
                             <td>{% if user.lastLogin is not null %}{{ user.lastLogin|date('d/m/Y H:i:s') }}{% endif %}</td>
                             <td>
-                                <a href="{{ path('user.edit', {id : user.id}) }}" class="btn btn-sm btn-warning" title="Modifier ce contrat">
+                                <a href="{{ path('user.password', {id : user.id}) }}" class="btn btn-sm btn-info" title="Modifier le mot de passe">
+                                    <i class="fas fa-key"></i>
+                                </a>
+
+                                <a href="{{ path('user.edit', {id : user.id}) }}" class="btn btn-sm btn-warning" title="Modifier cet utilisateur">
                                     <i class="fas fa-pen"></i>
                                 </a>
 

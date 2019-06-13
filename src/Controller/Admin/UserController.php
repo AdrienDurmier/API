@@ -97,6 +97,29 @@ class UserController extends AbstractController
     }
 
     /**
+     * @Route("/admin/user/password/{id}", name="user.password", methods="GET|POST")
+     * @param User $user
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function password(User $user, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        if ($request->isMethod('POST')) {
+            $valeurs_recu = $request->request->all();
+            $user->setPassword($this->encoder->encodePassword($user, $valeurs_recu['password']));
+            $em->persist($user);
+            $em->flush();
+            $this->addFlash('success', "Mot de passe modifié avec succès");
+            return $this->redirectToRoute('user.index');
+        }
+
+        return $this->render('user/password.html.twig', [
+            'user'      =>  $user,
+        ]);
+    }
+
+    /**
      * @Route("/admin/user/{id}", name="user.delete", methods="DELETE")
      * @param User $user
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
