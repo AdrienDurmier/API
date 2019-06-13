@@ -6,7 +6,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Unirest;
+use App\Entity\User;
 
 class BackController extends AbstractController
 {
@@ -16,7 +16,10 @@ class BackController extends AbstractController
      */
     public function index()
     {
+        $users = $this->getDoctrine()->getRepository(User::class)->findAll();
+
         return $this->render('back/index.html.twig', [
+            'nb_users' => count($users)
         ]);
     }
     
