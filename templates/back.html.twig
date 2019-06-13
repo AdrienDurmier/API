@@ -121,16 +121,36 @@
 
                     {# Alertes #}
                     {% for message in app.flashes('success') %}
-                        <div class="alert alert-success">{{ message }}</div>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fas fa-check"></i> {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     {%  endfor %}
                     {% for message in app.flashes('info') %}
-                        <div class="alert alert-info">{{ message }}</div>
-                    {%  endfor %}
-                    {% for message in app.flashes('danger') %}
-                        <div class="alert alert-danger">{{ message }}</div>
+                        <div class="alert alert-info alert-dismissible fade show" role="alert">
+                            <i class="fas fa-info-circle"></i> {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     {%  endfor %}
                     {% for message in app.flashes('warning') %}
-                        <div class="alert alert-warning">{{ message }}</div>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <i class="fas fa-exclamation-triangle"></i> {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {%  endfor %}
+                    {% for message in app.flashes('danger') %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="fas fa-times"></i> {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     {%  endfor %}
 
                     {# Contenu de la page #}

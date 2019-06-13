@@ -35,6 +35,12 @@
                 <div class="h6 m-0 font-weight-bold text-primary">Droits d'accès</div>
             </div>
             <div class="card-body">
+                <p>API Admin</p>
+                <div class="form-check">
+                    <input class="form-check-input" name="roles[]" type="checkbox" id="ROLE_ADMIN" value="ROLE_ADMIN" {% if 'ROLE_ADMIN' in user.getRoles %}checked{% endif %}>
+                    <label class="form-check-label" for="ROLE_ADMIN">ROLE_ADMIN</label>
+                </div>
+                <hr>
                 <p>Plateforme Telecom</p>
                 <div class="form-check">
                     <input class="form-check-input" name="roles[]" type="checkbox" id="ROLE_TELECOM_ADMIN" value="ROLE_TELECOM_ADMIN" {% if 'ROLE_TELECOM_ADMIN' in user.getRoles %}checked{% endif %}>
@@ -47,8 +53,8 @@
                 <hr>
                 <p>Fiche de frais</p>
                 <div class="form-check">
-                    <input class="form-check-input" name="roles[]" type="checkbox" id="ROLE_TELECOM_ADMIN" value="ROLE_TELECOM_ADMIN" {% if 'ROLE_TELECOM_ADMIN' in user.getRoles %}checked{% endif %}>
-                    <label class="form-check-label" for="ROLE_TELECOM_ADMIN">ROLE_FRAIS_ADMIN</label>
+                    <input class="form-check-input" name="roles[]" type="checkbox" id="ROLE_FRAIS_ADMIN" value="ROLE_FRAIS_ADMIN" {% if 'ROLE_FRAIS_ADMIN' in user.getRoles %}checked{% endif %}>
+                    <label class="form-check-label" for="ROLE_FRAIS_ADMIN">ROLE_FRAIS_ADMIN</label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" name="roles[]" type="checkbox" id="ROLE_FRAIS_EMPLOYE" value="ROLE_FRAIS_EMPLOYE" {% if 'ROLE_FRAIS_EMPLOYE' in user.getRoles %}checked{% endif %}>

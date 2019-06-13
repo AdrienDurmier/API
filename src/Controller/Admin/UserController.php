@@ -47,6 +47,7 @@ class UserController extends AbstractController
             $user->setUsername($valeurs_recu['email']);
             $user->setEmail($valeurs_recu['email']);
             $user->setPassword($this->encoder->encodePassword($user, $valeurs_recu['password']));
+            $user->setEnabled(isset($valeurs_recu['enabled'])?$valeurs_recu['enabled']:0);
             foreach($valeurs_recu['roles'] as $role):
                 $user->addRole($role);
             endforeach;
@@ -75,12 +76,15 @@ class UserController extends AbstractController
             $valeurs_recu = $request->request->all();
             $user->setUsername($valeurs_recu['email']);
             $user->setEmail($valeurs_recu['email']);
+            $user->setEnabled(isset($valeurs_recu['enabled'])?$valeurs_recu['enabled']:0);
             foreach($user->getRoles() as $role):
                 $user->removeRole($role);
             endforeach;
-            foreach($valeurs_recu['roles'] as $role):
-                $user->addRole($role);
-            endforeach;
+            if(isset($valeurs_recu['roles'])):
+                foreach($valeurs_recu['roles'] as $role):
+                    $user->addRole($role);
+                endforeach;
+            endif;
             $em->persist($user);
             $em->flush();
             $this->addFlash('success', "Utilisateur créé avec succès");
