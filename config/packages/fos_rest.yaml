@@ -11,7 +11,7 @@ fos_rest:
         serialize_null: true
     format_listener:
         rules:
-            - { path: '^/', priorities: ['json'], fallback_format: 'json' }
+            - { path: ^/, prefer_extension: true, fallback_format: json, priorities: [ json, html ] }
     param_fetcher_listener: force
 #    param_fetcher_listener:  true
 #    allowed_methods_listener:  true
