@@ -1,0 +1,9 @@
+.bg-black {
+    background-color: #000 !important;
+}
+  
+a.bg-black:hover, a.bg-black:focus,
+  button.bg-black:hover,
+  button.bg-black:focus {
+    background-color: #42444e !important;
+}

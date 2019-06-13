@@ -3298,9 +3298,9 @@ input[type="button"].btn-block {
   color: #858796;
   text-align: left;
   list-style: none;
-  background-color: #fff;
+  background-color: rgba(0,0,0,0.9);
   background-clip: padding-box;
-  border: 1px solid #e3e6f0;
+  border: 1px solid #000;
   border-radius: 0.35rem;
 }
 
@@ -3462,7 +3462,7 @@ input[type="button"].btn-block {
   padding: 0.25rem 1.5rem;
   clear: both;
   font-weight: 400;
-  color: #3a3b45;
+  color: #c2c2c2;
   text-align: inherit;
   white-space: nowrap;
   background-color: transparent;
@@ -3470,15 +3470,15 @@ input[type="button"].btn-block {
 }
 
 .dropdown-item:hover, .dropdown-item:focus {
-  color: #2e2f37;
+  color: #fff;
   text-decoration: none;
-  background-color: #ffffff;
+  background-color: #000;
 }
 
 .dropdown-item.active, .dropdown-item:active {
   color: #fff;
   text-decoration: none;
-  background-color: #0094ca;
+  background-color: #000;
 }
 
 .dropdown-item.disabled, .dropdown-item:disabled {
@@ -5135,10 +5135,10 @@ input[type="button"].btn-block {
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  padding: 0;
+  padding: 0.3rem;
   margin-bottom: 1rem;
   list-style: none;
-  background-color: transparent;
+  background-color: rgba(0,0,0,0.2);
   font-size: 0.8rem;
 }
 
