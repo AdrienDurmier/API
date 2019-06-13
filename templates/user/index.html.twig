@@ -11,7 +11,7 @@
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800"><i class="fas fa-users text-gray-400"></i> <span>Gestions des utilisateurs</span></h1>
         <div class="d-sm-inline-block">
-            <a href="#todo" class="d-sm-inline-block btn btn-sm btn-success shadow-sm">
+            <a href="{{ path('user.new') }}" class="d-sm-inline-block btn btn-sm btn-success shadow-sm">
                 <i class="fas fa-user-plus fa-sm text-white-50"></i> Créer un utilisateur
             </a>
         </div>
@@ -26,9 +26,9 @@
                     <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Username</th>
-                        <th>Email</th>
+                        <th>Username/Email</th>
                         <th>Actif</th>
+                        <th>Roles</th>
                         <th>Dernière connexion</th>
                         <th>Actions</th>
                     </tr>
@@ -38,17 +38,21 @@
                         <tr>
                             <td>{{ user.id }}</td>
                             <td>{{ user.username }}</td>
-                            <td>{{ user.email }}</td>
-                            <td>{{ user.enabled }}</td>
-                            <td>{{ user.lastLogin|date('d/m/Y H:i:s') }}</td>
+                            <td>{{ user.enabled|display_boolean }}</td>
                             <td>
-                                <a href="#todo" class="btn btn-sm btn-warning" title="Modifier ce contrat">
+                                {% for role in user.getRoles %}
+                                    <small><span class="badge badge-pill badge-secondary small">{{ role }}</span></small>
+                                {% endfor %}
+                            </td>
+                            <td>{% if user.lastLogin is not null %}{{ user.lastLogin|date('d/m/Y H:i:s') }}{% endif %}</td>
+                            <td>
+                                <a href="{{ path('user.edit', {id : user.id}) }}" class="btn btn-sm btn-warning" title="Modifier ce contrat">
                                     <i class="fas fa-pen"></i>
                                 </a>
 
-                                <form method="post" action="#todo" style="display:inline-block;" onsubmit="return confirm('Êtes-vous sûr ?')">
+                                <form method="post" action="{{ path('user.delete', {id : user.id}) }}" style="display:inline-block;" onsubmit="return confirm('Êtes-vous sûr ?')">
                                     <input type="hidden" name="_method" value="DELETE">
-                                    {#<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ contrat_xdsl.id) }}">#}
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
                                     <button class="btn btn-sm btn-danger" title="Supprimer cet utilisateur"><i class="fas fa-trash"></i></button>
                                 </form>
                             </td>

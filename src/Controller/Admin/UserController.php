@@ -6,9 +6,20 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
 {
+    /**
+     * @var UserPasswordEncoderInterface
+     */
+    private $encoder;
+
+    public function __construct(UserPasswordEncoderInterface $encoder)
+    {
+        $this->encoder = $encoder;
+    }
+
     /**
      * @Route("/admin/user", name="user.index")
      * @return \Symfony\Component\HttpFoundation\Response
@@ -20,5 +31,80 @@ class UserController extends AbstractController
         return $this->render('user/index.html.twig', [
             'users' =>  $users
         ]);
+    }
+
+    /**
+     * @Route("/admin/user/new", name="user.new", methods="GET|POST")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function new(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        if ($request->isMethod('POST')) {
+            $valeurs_recu = $request->request->all();
+            $user = new User();
+            $user->setUsername($valeurs_recu['email']);
+            $user->setEmail($valeurs_recu['email']);
+            $user->setPassword($this->encoder->encodePassword($user, $valeurs_recu['password']));
+            foreach($valeurs_recu['roles'] as $role):
+                $user->addRole($role);
+            endforeach;
+            $em->persist($user);
+            $em->flush();
+            
+            $em->persist($user);
+            $em->flush();
+            $this->addFlash('success', "Utilisateur créé avec succès");
+            return $this->redirectToRoute('user.index');
+        }
+
+        return $this->render('user/new.html.twig');
+    }
+
+    /**
+     * @Route("/admin/user/edit/{id}", name="user.edit", methods="GET|POST")
+     * @param User $user
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function edit(User $user, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        if ($request->isMethod('POST')) {
+            $valeurs_recu = $request->request->all();
+            $user->setUsername($valeurs_recu['email']);
+            $user->setEmail($valeurs_recu['email']);
+            foreach($user->getRoles() as $role):
+                $user->removeRole($role);
+            endforeach;
+            foreach($valeurs_recu['roles'] as $role):
+                $user->addRole($role);
+            endforeach;
+            $em->persist($user);
+            $em->flush();
+            $this->addFlash('success', "Utilisateur créé avec succès");
+            return $this->redirectToRoute('user.index');
+        }
+
+        return $this->render('user/edit.html.twig', [
+            'user'      =>  $user,
+        ]);
+    }
+
+    /**
+     * @Route("/admin/user/{id}", name="user.delete", methods="DELETE")
+     * @param User $user
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function delete(User $user, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        if($this->isCsrfTokenValid('delete' . $user->getId(), $request->get('_token'))){
+            $em->remove($user);
+            $em->flush();
+            $this->addFlash('success', "Utilisateur supprimé avec succès");
+        }
+        return $this->redirectToRoute('user.index');
     }
 }
