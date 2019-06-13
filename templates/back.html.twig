@@ -7,14 +7,14 @@
         <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/plateforme/css/sb-admin-2.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/select2/css/select2.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/plateforme/css/front.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/plateforme/css/back.css') }}">
         {% block stylesheets %}{% endblock %}
     </head>
     <body id="page-top">
 
         <div id="wrapper">
 
-            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <ul class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon">
@@ -49,94 +49,85 @@
 
             <div id="content-wrapper" class="d-flex flex-column">
 
-            <div id="content">
+                <div id="content">
 
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <nav class="navbar navbar-expand navbar-dark bg-black topbar mb-4 static-top shadow">
 
-                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa fa-bars"></i>
-                </button>
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
 
-                <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto">
 
-                    {# Documentation #}
-                    <li class="nav-item dropdown no-arrow mx-1">
-                        <a class="nav-link dropdown-toggle" href="/api/doc" title="Aide en ligne">
-                            <i class="fas fa-info-circle fa-fw"></i>
-                        </a>
-                    </li>
-
-                    <div class="topbar-divider d-none d-sm-block"></div>
-
-                    {# Utilisateur #}
-                    <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ app.user.username }}</span>
-                            <img class="img-profile rounded-circle" src="https://avatars0.githubusercontent.com/u/6449381?s=460&v=4">
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="{{ path('logout') }}" title="Se déconnecter">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Se déconnecter
+                        {# Documentation #}
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="/api/doc" title="Aide en ligne">
+                                <i class="fas fa-info-circle fa-fw"></i>
                             </a>
-                        </div>
-                    </li>
+                        </li>
 
-                </ul>
+                        <div class="topbar-divider d-none d-sm-block"></div>
 
-                </nav>
+                        {# Utilisateur #}
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ app.user.username }}</span>
+                                <img class="img-profile rounded-circle" src="https://avatars0.githubusercontent.com/u/6449381?s=460&v=4">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="{{ path('logout') }}" title="Se déconnecter">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Se déconnecter
+                                </a>
+                            </div>
+                        </li>
 
-                
-                <div class="container-fluid">
+                    </ul>
 
-                    {# Alertes #}
-                    {% for message in app.flashes('success') %}
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="fas fa-check"></i> {{ message }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    {%  endfor %}
-                    {% for message in app.flashes('info') %}
-                        <div class="alert alert-info alert-dismissible fade show" role="alert">
-                            <i class="fas fa-info-circle"></i> {{ message }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    {%  endfor %}
-                    {% for message in app.flashes('warning') %}
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <i class="fas fa-exclamation-triangle"></i> {{ message }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    {%  endfor %}
-                    {% for message in app.flashes('danger') %}
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <i class="fas fa-times"></i> {{ message }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    {%  endfor %}
+                    </nav>
 
-                    {# Contenu de la page #}
-                    {% block body %}{% endblock %}
+                    
+                    <div class="container-fluid">
 
-                </div>
+                        {# Alertes #}
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <i class="fas fa-check"></i> {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {%  endfor %}
+                        {% for message in app.flashes('info') %}
+                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                <i class="fas fa-info-circle"></i> {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {%  endfor %}
+                        {% for message in app.flashes('warning') %}
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <i class="fas fa-exclamation-triangle"></i> {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {%  endfor %}
+                        {% for message in app.flashes('danger') %}
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <i class="fas fa-times"></i> {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {%  endfor %}
 
-            </div>
+                        {# Contenu de la page #}
+                        {% block body %}{% endblock %}
 
-            {# Pied de page #}
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Amedia solutions 2019</span>
                     </div>
+
                 </div>
-            </footer>
 
             </div>
 
