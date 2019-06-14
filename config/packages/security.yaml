@@ -25,6 +25,7 @@ security:
         - { path: ^/api/doc, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/auth/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/auth/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/token/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
 
     firewalls:
@@ -50,6 +51,11 @@ security:
 
         api_doc:
             pattern:  ^/api/doc
+            stateless: true
+            anonymous: true
+
+        api_refresh:
+            pattern:  ^/api/token/refresh
             stateless: true
             anonymous: true
 
